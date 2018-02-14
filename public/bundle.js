@@ -68,6 +68,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 const mapboxgl = __webpack_require__(1);
+const buildMarker = __webpack_require__(2);
 
 mapboxgl.accessToken = "pk.eyJ1IjoiYmFsdGF6YXJ2IiwiYSI6ImNqZG1kaGFnOTBrNWQyeG80cHB0a3d1MWoifQ.GjZciZaKkotHccRIl_7QOg";
 
@@ -77,6 +78,15 @@ const map = new mapboxgl.Map({
   zoom: 12, // starting zoom
   style: "mapbox://styles/mapbox/streets-v10" // mapbox has lots of different map styles available.
 });
+
+const schoolMarker = buildMarker("activity", [-74.009151, 40.705086]); // or [-87.6354, 41.8885]
+schoolMarker.addTo(map);
+
+const restoMarker = buildMarker("restaurant", [-73.998223, 40.722604]);
+restoMarker.addTo(map);
+
+const hotelMarker = buildMarker("hotel", [-74.0078522, 40.7244117]);
+hotelMarker.addTo(map);
 
 
 /***/ }),
@@ -647,6 +657,30 @@ module.exports={"$version":8,"$root":{"version":{"required":true,"type":"enum","
 
 
 //# sourceMappingURL=mapbox-gl.js.map
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const mapboxgl = __webpack_require__(1);
+
+const iconURLs = {
+  hotel: "http://i.imgur.com/D9574Cu.png",
+  restaurant: "http://i.imgur.com/cqR6pUI.png",
+  activity: "http://i.imgur.com/WbMOfMl.png"
+};
+
+const buildMarker = function (type, coords) {
+  console.log(type, coords, iconURLs[type])
+  const markerDomEl = document.createElement("div");
+  markerDomEl.style.width = "32px";
+  markerDomEl.style.height = "39px";
+  markerDomEl.style.backgroundImage = 'url(' + iconURLs[type] + ')';
+  return new mapboxgl.Marker(markerDomEl).setLngLat(coords);
+};
+
+module.exports = buildMarker;
+
 
 /***/ })
 /******/ ]);
