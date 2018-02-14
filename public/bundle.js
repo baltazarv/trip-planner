@@ -78,8 +78,6 @@ const map = new mapboxgl.Map({
   style: "mapbox://styles/mapbox/streets-v10" // mapbox has lots of different map styles available.
 });
 
-console.log('hey')
-
 
 /***/ }),
 /* 1 */
